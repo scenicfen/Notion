@@ -7,8 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #282828;
-            color: #ffffff;
+            background-color: #f0f0f0;
+            color: #333;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,56 +17,53 @@
         }
 
         .weapons-section {
-            background-color: #333;
+            background-color: #fff;
             padding: 20px;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 80%;
-            max-width: 600px;
+            max-width: 800px;
         }
 
         .weapons-section h2 {
             text-align: center;
-            color: #f0a500;
+            color: #333;
         }
 
         .weapons-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            margin-top: 20px;
         }
 
         .weapon-card {
-            background-color: #444;
-            padding: 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr 2fr;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #e0e7ff;
             border-radius: 5px;
-            text-align: center;
         }
 
-        .weapon-card h3 {
-            margin: 0;
-            font-size: 16px;
-            color: #f0a500;
-        }
-
-        .weapon-card p {
-            margin: 5px 0;
-            font-size: 14px;
-            color: #ffffff;
+        .weapon-card input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
         }
 
         button {
             display: block;
             margin: 20px auto 0;
             padding: 10px 20px;
-            background-color: #f0a500;
-            color: #282828;
+            background-color: #4CAF50;
+            color: #fff;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
         button:hover {
-            background-color: #d18b00;
+            background-color: #45a049;
         }
     </style>
 </head>
@@ -77,22 +74,28 @@
         <button onclick="addWeapon()">Add Weapon</button>
     </div>
     <script>
-        const weapons = [
-            { name: 'Longsword', attackBonus: '+5', damage: '1d8+3' },
-            { name: 'Shortbow', attackBonus: '+4', damage: '1d6+2' }
-        ];
+        const weapons = [];
 
         function renderWeapons() {
             const container = document.getElementById('weapons-container');
-            container.innerHTML = '';
+            container.innerHTML = `
+                <div class="weapon-card">
+                    <input type="text" placeholder="Attack/Weapon Name" disabled>
+                    <input type="text" placeholder="Range" disabled>
+                    <input type="text" placeholder="Hit/DC" disabled>
+                    <input type="text" placeholder="Damage/Effect" disabled>
+                    <input type="text" placeholder="Notes" disabled>
+                </div>
+            `;
             weapons.forEach((weapon, index) => {
                 const card = document.createElement('div');
                 card.className = 'weapon-card';
                 card.innerHTML = `
-                    <h3>${weapon.name}</h3>
-                    <p>Attack Bonus: ${weapon.attackBonus}</p>
-                    <p>Damage: ${weapon.damage}</p>
-                    <button onclick="editWeapon(${index})">Edit</button>
+                    <input type="text" value="${weapon.name}" placeholder="Attack/Weapon Name" oninput="updateWeapon(${index}, 'name', this.value)">
+                    <input type="text" value="${weapon.range}" placeholder="Range" oninput="updateWeapon(${index}, 'range', this.value)">
+                    <input type="text" value="${weapon.hitDc}" placeholder="Hit/DC" oninput="updateWeapon(${index}, 'hitDc', this.value)">
+                    <input type="text" value="${weapon.damageEffect}" placeholder="Damage/Effect" oninput="updateWeapon(${index}, 'damageEffect', this.value)">
+                    <input type="text" value="${weapon.notes}" placeholder="Notes" oninput="updateWeapon(${index}, 'notes', this.value)">
                     <button onclick="removeWeapon(${index})">Remove</button>
                 `;
                 container.appendChild(card);
@@ -100,24 +103,12 @@
         }
 
         function addWeapon() {
-            const name = prompt('Enter weapon name:');
-            const attackBonus = prompt('Enter attack bonus:');
-            const damage = prompt('Enter damage:');
-            if (name && attackBonus && damage) {
-                weapons.push({ name, attackBonus, damage });
-                renderWeapons();
-            }
+            weapons.push({ name: '', range: '', hitDc: '', damageEffect: '', notes: '' });
+            renderWeapons();
         }
 
-        function editWeapon(index) {
-            const weapon = weapons[index];
-            const name = prompt('Enter new weapon name:', weapon.name);
-            const attackBonus = prompt('Enter new attack bonus:', weapon.attackBonus);
-            const damage = prompt('Enter new damage:', weapon.damage);
-            if (name && attackBonus && damage) {
-                weapons[index] = { name, attackBonus, damage };
-                renderWeapons();
-            }
+        function updateWeapon(index, key, value) {
+            weapons[index][key] = value;
         }
 
         function removeWeapon(index) {
