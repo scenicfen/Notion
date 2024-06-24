@@ -21,8 +21,8 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 800px;
+            width: 90%;
+            max-width: 1000px;
         }
 
         .weapons-section h2 {
@@ -31,79 +31,84 @@
         }
 
         .weapons-container {
-            margin-top: 20px;
-        }
-
-        .weapon-card {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 2fr 2fr;
+            grid-template-columns: repeat(6, 1fr);
             gap: 10px;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #e0e7ff;
-            border-radius: 5px;
+            margin-top: 20px;
+            align-items: center;
         }
 
-        .weapon-card input {
+        .weapons-container input, .weapons-container button {
             width: 100%;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
 
-        button {
-            display: block;
-            margin: 20px auto 0;
-            padding: 10px 20px;
+        .weapons-container button {
             background-color: #4CAF50;
             color: #fff;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
 
-        button:hover {
+        .weapons-container button:hover {
             background-color: #45a049;
+        }
+
+        .header {
+            font-weight: bold;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        .weapon-row {
+            display: contents;
         }
     </style>
 </head>
 <body>
     <div class="weapons-section">
         <h2>Weapons & Attacks</h2>
-        <div id="weapons-container" class="weapons-container"></div>
+        <div class="weapons-container">
+            <div class="header">Weapon/Attack</div>
+            <div class="header">Range</div>
+            <div class="header">Hit/DC</div>
+            <div class="header">Damage</div>
+            <div class="header">Type</div>
+            <div class="header">Notes</div>
+            <div id="weapons-rows"></div>
+        </div>
         <button onclick="addWeapon()">Add Weapon</button>
     </div>
     <script>
-        const weapons = [];
+        const weapons = [
+            { name: 'Longsword', range: '-', hitDc: '+5', damage: '2d8 + 3', type: 'Slashing', notes: '-' }
+        ];
 
         function renderWeapons() {
-            const container = document.getElementById('weapons-container');
-            container.innerHTML = `
-                <div class="weapon-card">
-                    <input type="text" placeholder="Attack/Weapon Name" disabled>
-                    <input type="text" placeholder="Range" disabled>
-                    <input type="text" placeholder="Hit/DC" disabled>
-                    <input type="text" placeholder="Damage/Effect" disabled>
-                    <input type="text" placeholder="Notes" disabled>
-                </div>
-            `;
+            const rowsContainer = document.getElementById('weapons-rows');
+            rowsContainer.innerHTML = '';
             weapons.forEach((weapon, index) => {
-                const card = document.createElement('div');
-                card.className = 'weapon-card';
-                card.innerHTML = `
-                    <input type="text" value="${weapon.name}" placeholder="Attack/Weapon Name" oninput="updateWeapon(${index}, 'name', this.value)">
+                const row = document.createElement('div');
+                row.className = 'weapon-row';
+                row.innerHTML = `
+                    <input type="text" value="${weapon.name}" placeholder="Weapon/Attack" oninput="updateWeapon(${index}, 'name', this.value)">
                     <input type="text" value="${weapon.range}" placeholder="Range" oninput="updateWeapon(${index}, 'range', this.value)">
                     <input type="text" value="${weapon.hitDc}" placeholder="Hit/DC" oninput="updateWeapon(${index}, 'hitDc', this.value)">
-                    <input type="text" value="${weapon.damageEffect}" placeholder="Damage/Effect" oninput="updateWeapon(${index}, 'damageEffect', this.value)">
+                    <input type="text" value="${weapon.damage}" placeholder="Damage" oninput="updateWeapon(${index}, 'damage', this.value)">
+                    <input type="text" value="${weapon.type}" placeholder="Type" oninput="updateWeapon(${index}, 'type', this.value)">
                     <input type="text" value="${weapon.notes}" placeholder="Notes" oninput="updateWeapon(${index}, 'notes', this.value)">
                     <button onclick="removeWeapon(${index})">Remove</button>
                 `;
-                container.appendChild(card);
+                rowsContainer.appendChild(row);
             });
         }
 
         function addWeapon() {
-            weapons.push({ name: '', range: '', hitDc: '', damageEffect: '', notes: '' });
+            weapons.push({ name: '', range: '', hitDc: '', damage: '', type: '', notes: '' });
             renderWeapons();
         }
 
