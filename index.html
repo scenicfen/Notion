@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D&D Character Weapons and Attacks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #282828;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .weapons-section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .weapons-section h2 {
+            text-align: center;
+            color: #f0a500;
+        }
+
+        .weapons-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .weapon-card {
+            background-color: #444;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .weapon-card h3 {
+            margin: 0;
+            font-size: 16px;
+            color: #f0a500;
+        }
+
+        .weapon-card p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #f0a500;
+            color: #282828;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d18b00;
+        }
+    </style>
+</head>
+<body>
+    <div class="weapons-section">
+        <h2>Weapons & Attacks</h2>
+        <div id="weapons-container" class="weapons-container"></div>
+        <button onclick="addWeapon()">Add Weapon</button>
+    </div>
+    <script>
+        const weapons = [
+            { name: 'Longsword', attackBonus: '+5', damage: '1d8+3' },
+            { name: 'Shortbow', attackBonus: '+4', damage: '1d6+2' }
+        ];
+
+        function renderWeapons() {
+            const container = document.getElementById('weapons-container');
+            container.innerHTML = '';
+            weapons.forEach((weapon, index) => {
+                const card = document.createElement('div');
+                card.className = 'weapon-card';
+                card.innerHTML = `
+                    <h3>${weapon.name}</h3>
+                    <p>Attack Bonus: ${weapon.attackBonus}</p>
+                    <p>Damage: ${weapon.damage}</p>
+                    <button onclick="editWeapon(${index})">Edit</button>
+                    <button onclick="removeWeapon(${index})">Remove</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function addWeapon() {
+            const name = prompt('Enter weapon name:');
+            const attackBonus = prompt('Enter attack bonus:');
+            const damage = prompt('Enter damage:');
+            if (name && attackBonus && damage) {
+                weapons.push({ name, attackBonus, damage });
+                renderWeapons();
+            }
+        }
+
+        function editWeapon(index) {
+            const weapon = weapons[index];
+            const name = prompt('Enter new weapon name:', weapon.name);
+            const attackBonus = prompt('Enter new attack bonus:', weapon.attackBonus);
+            const damage = prompt('Enter new damage:', weapon.damage);
+            if (name && attackBonus && damage) {
+                weapons[index] = { name, attackBonus, damage };
+                renderWeapons();
+            }
+        }
+
+        function removeWeapon(index) {
+            weapons.splice(index, 1);
+            renderWeapons();
+        }
+
+        // Initial render
+        renderWeapons();
+    </script>
+</body>
+</html>
