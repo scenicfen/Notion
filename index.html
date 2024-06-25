@@ -30,7 +30,7 @@
             color: #333;
         }
 
-        .weapons-container {
+        .weapons-container, .weapon-row {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             gap: 10px;
@@ -52,14 +52,14 @@
             text-align: center;
         }
 
-        .weapons-container input, .weapons-container button {
+        .weapons-container input, .weapons-container button, .weapon-row input, .weapon-row button {
             width: 100%;
             padding: 5px;
             border: 1px solid #ccc;
             border-radius: 3px;
         }
 
-        .weapons-container button {
+        .weapons-container button, .weapon-row button {
             background-color: #4CAF50;
             color: #fff;
             border: none;
@@ -67,7 +67,7 @@
             padding: 10px;
         }
 
-        .weapons-container button:hover {
+        .weapons-container button:hover, .weapon-row button:hover {
             background-color: #45a049;
         }
 
@@ -114,13 +114,13 @@
                 const row = document.createElement('div');
                 row.className = 'weapon-row';
                 row.innerHTML = `
-                    <div class="weapon"><input type="text" value="${weapon.name}" placeholder="Weapon/Attack" oninput="updateWeapon(${index}, 'name', this.value)"></div>
-                    <div class="weapon"><input type="text" value="${weapon.range}" placeholder="Range" oninput="updateWeapon(${index}, 'range', this.value)"></div>
-                    <div class="weapon"><input type="text" value="${weapon.hitDc}" placeholder="Hit/DC" oninput="updateWeapon(${index}, 'hitDc', this.value)"></div>
-                    <div class="weapon"><input type="text" value="${weapon.damage}" placeholder="Damage" oninput="updateWeapon(${index}, 'damage', this.value)"></div>
-                    <div class="weapon"><input type="text" value="${weapon.type}" placeholder="Type" oninput="updateWeapon(${index}, 'type', this.value)"></div>
-                    <div class="weapon"><input type="text" value="${weapon.notes}" placeholder="Notes" oninput="updateWeapon(${index}, 'notes', this.value)"></div>
-                    <div class="weapon"><button class="remove-button" onclick="removeWeapon(${index})">Remove</button></div>
+                    <input type="text" value="${weapon.name}" placeholder="Weapon/Attack" oninput="updateWeapon(${index}, 'name', this.value)">
+                    <input type="text" value="${weapon.range}" placeholder="Range" oninput="updateWeapon(${index}, 'range', this.value)">
+                    <input type="text" value="${weapon.hitDc}" placeholder="Hit/DC" oninput="updateWeapon(${index}, 'hitDc', this.value)">
+                    <input type="text" value="${weapon.damage}" placeholder="Damage" oninput="updateWeapon(${index}, 'damage', this.value)">
+                    <input type="text" value="${weapon.type}" placeholder="Type" oninput="updateWeapon(${index}, 'type', this.value)">
+                    <input type="text" value="${weapon.notes}" placeholder="Notes" oninput="updateWeapon(${index}, 'notes', this.value)">
+                    <button class="remove-button" onclick="removeWeapon(${index})">Remove</button>
                 `;
                 rowsContainer.appendChild(row);
             });
