@@ -40,7 +40,7 @@
             border-radius: 4px; /* Rounded corners */
             text-align: center; /* Center text */
             box-sizing: border-box; /* Include padding in width calculation */
-            width: 130px; /* Set a fixed width for consistency */
+            width: 120px; /* Set a fixed width for consistency */
             margin: 0 5px; /* Margin around items */
         }
         /* Additional styles for input fields */
@@ -75,21 +75,21 @@
     <div class="container">
         <h2>Weapons & Attacks</h2>
         <div class="header">
-            <div>Weapon/Attack</div>
-            <div>Range</div>
-            <div>Hit/DC</div>
-            <div>Damage</div>
-            <div>Type</div>
-            <div>Notes</div>
+            <div class="col">Weapon/Attack</div>
+            <div class="col">Range</div>
+            <div class="col">Hit/DC</div>
+            <div class="col">Damage</div>
+            <div class="col">Type</div>
+            <div class="col">Notes</div>
         </div>
         <div id="data-rows">
             <div class="input-row">
-                <input type="text" placeholder="Weapon/Attack">
-                <input type="text" placeholder="Range">
-                <input type="text" placeholder="Hit/DC">
-                <input type="text" placeholder="Damage">
-                <input type="text" placeholder="Type">
-                <input type="text" placeholder="Notes">
+                <input type="text" class="col" placeholder="Weapon/Attack">
+                <input type="text" class="col" placeholder="Range">
+                <input type="text" class="col" placeholder="Hit/DC">
+                <input type="text" class="col" placeholder="Damage">
+                <input type="text" class="col" placeholder="Type">
+                <input type="text" class="col" placeholder="Notes">
             </div>
         </div>
         <button class="add-row-button" onclick="addRow()">Add Row</button>
@@ -101,12 +101,12 @@
             const newRow = document.createElement('div');
             newRow.className = 'input-row';
             newRow.innerHTML = `
-                <input type="text" placeholder="Weapon/Attack">
-                <input type="text" placeholder="Range">
-                <input type="text" placeholder="Hit/DC">
-                <input type="text" placeholder="Damage">
-                <input type="text" placeholder="Type">
-                <input type="text" placeholder="Notes">
+                <input type="text" class="col" placeholder="Weapon/Attack">
+                <input type="text" class="col" placeholder="Range">
+                <input type="text" class="col" placeholder="Hit/DC">
+                <input type="text" class="col" placeholder="Damage">
+                <input type="text" class="col" placeholder="Type">
+                <input type="text" class="col" placeholder="Notes">
             `;
             dataRows.appendChild(newRow);
         }
