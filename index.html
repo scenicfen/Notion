@@ -33,15 +33,15 @@
             justify-content: space-between; /* Space between headers */
             margin-bottom: 10px; /* Space below headers */
         }
-        /* Style for each header item and input field */
+        /* Style for each header item */
         .header div, .input-row input {
             background-color: #444444; /* Background color */
             padding: 10px; /* Padding inside */
             border-radius: 4px; /* Rounded corners */
             text-align: center; /* Center text */
-            flex: 1; /* Evenly space items */
             margin: 0 5px; /* Margin around items */
             box-sizing: border-box; /* Include padding in width calculation */
+            flex-basis: calc(100% / 6 - 10px); /* Distribute width evenly, accounting for margins */
         }
         /* Additional styles for input fields */
         .input-row input {
