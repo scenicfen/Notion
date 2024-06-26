@@ -3,146 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>D&D Character Weapons and Attacks</title>
+    <title>Weapons & Attacks</title>
     <style>
+        /* Style for the entire page */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            font-family: Arial, sans-serif; /* Font family for the text */
+            background-color: #2e2e2e; /* Background color of the page */
+            color: #ffffff; /* Text color */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Padding around the container */
+            display: flex; /* Use flexbox for alignment */
+            justify-content: flex-start; /* Align to the left */
+            align-items: flex-start; /* Align to the top */
+            min-height: 100vh; /* Ensure body takes full height */
+            box-sizing: border-box; /* Include padding in height calculation */
         }
-
-        .weapons-section {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 1000px;
+        /* Style for the main container */
+        .container {
+            background-color: #333333; /* Background color of the container */
+            padding: 20px; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            max-width: 600px; /* Maximum width of the container */
+            width: 100%; /* Full width */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
-
-        .weapons-section h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        .weapons-container, .weapon-row {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-            align-items: center;
-        }
-
+        /* Style for the header */
         .header {
-            font-weight: bold;
-            background-color: #e0e0e0;
-            padding: 10px;
-            border-radius: 3px;
-            text-align: center;
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between headers */
+            margin-bottom: 10px; /* Space below headers */
         }
-
-        .weapon {
-            padding: 10px;
-            border-radius: 3px;
-            text-align: center;
+        /* Style for each header item */
+        .header div {
+            background-color: #444444; /* Background color of header boxes */
+            padding: 10px; /* Padding inside header boxes */
+            border-radius: 4px; /* Rounded corners */
+            text-align: center; /* Center text */
+            flex: 1; /* Evenly space header items */
+            margin: 0 5px; /* Margin around header items */
         }
-
-        .weapons-container input, .weapons-container button, .weapon-row input, .weapon-row button {
-            width: 100%;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
+        /* Style for the input rows */
+        .input-row {
+            display: flex; /* Use flexbox for alignment */
+            justify-content: space-between; /* Space between input fields */
+            margin-bottom: 10px; /* Space below each row */
         }
-
-        .weapons-container button, .weapon-row button {
-            background-color: #4CAF50;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
+        /* Style for each input field */
+        .input-row input {
+            background-color: #555555; /* Background color of input fields */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px; /* Padding inside input fields */
+            color: #ffffff; /* Text color */
+            flex: 1; /* Evenly space input fields */
+            margin: 0 5px; /* Margin around input fields */
         }
-
-        .weapons-container button:hover, .weapon-row button:hover {
-            background-color: #45a049;
-        }
-
-        .remove-button {
-            background-color: #f44336;
-        }
-
-        .remove-button:hover {
-            background-color: #e53935;
-        }
-
-        .buttons-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
+        /* Style for the add row button */
+        .add-row-button {
+            background-color: #777777; /* Background color of button */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px 20px; /* Padding inside button */
+            color: #ffffff; /* Text color */
+            cursor: pointer; /* Pointer cursor on hover */
+            text-align: center; /* Center text */
+            margin-top: 10px; /* Space above button */
+            display: block; /* Block element */
+            width: 100%; /* Full width */
         }
     </style>
 </head>
 <body>
-    <div class="weapons-section">
+    <div class="container">
         <h2>Weapons & Attacks</h2>
-        <div class="weapons-container">
-            <div class="header">Weapon/Attack</div>
-            <div class="header">Range</div>
-            <div class="header">Hit/DC</div>
-            <div class="header">Damage</div>
-            <div class="header">Type</div>
-            <div class="header">Notes</div>
+        <div class="header">
+            <div>Weapon/Attack</div>
+            <div>Range</div>
+            <div>Hit/DC</div>
+            <div>Damage</div>
+            <div>Type</div>
+            <div>Notes</div>
         </div>
-        <div id="weapons-rows" class="weapons-container"></div>
-        <div class="buttons-container">
-            <button onclick="addWeapon()">Add Weapon</button>
+        <div id="data-rows">
+            <div class="input-row">
+                <input type="text" placeholder="Weapon/Attack">
+                <input type="text" placeholder="Range">
+                <input type="text" placeholder="Hit/DC">
+                <input type="text" placeholder="Damage">
+                <input type="text" placeholder="Type">
+                <input type="text" placeholder="Notes">
+            </div>
         </div>
+        <button class="add-row-button" onclick="addRow()">Add Row</button>
     </div>
+
     <script>
-        const weapons = [
-            { name: 'Longsword', range: '-', hitDc: '+5', damage: '2d8 + 3', type: 'Slashing', notes: '-' }
-        ];
-
-        function renderWeapons() {
-            const rowsContainer = document.getElementById('weapons-rows');
-            rowsContainer.innerHTML = '';
-            weapons.forEach((weapon, index) => {
-                const row = document.createElement('div');
-                row.className = 'weapon-row';
-                row.innerHTML = `
-                    <input type="text" value="${weapon.name}" placeholder="Weapon/Attack" oninput="updateWeapon(${index}, 'name', this.value)">
-                    <input type="text" value="${weapon.range}" placeholder="Range" oninput="updateWeapon(${index}, 'range', this.value)">
-                    <input type="text" value="${weapon.hitDc}" placeholder="Hit/DC" oninput="updateWeapon(${index}, 'hitDc', this.value)">
-                    <input type="text" value="${weapon.damage}" placeholder="Damage" oninput="updateWeapon(${index}, 'damage', this.value)">
-                    <input type="text" value="${weapon.type}" placeholder="Type" oninput="updateWeapon(${index}, 'type', this.value)">
-                    <input type="text" value="${weapon.notes}" placeholder="Notes" oninput="updateWeapon(${index}, 'notes', this.value)">
-                    <button class="remove-button" onclick="removeWeapon(${index})">Remove</button>
-                `;
-                rowsContainer.appendChild(row);
-            });
+        function addRow() {
+            const dataRows = document.getElementById('data-rows');
+            const newRow = document.createElement('div');
+            newRow.className = 'input-row';
+            newRow.innerHTML = `
+                <input type="text" placeholder="Weapon/Attack">
+                <input type="text" placeholder="Range">
+                <input type="text" placeholder="Hit/DC">
+                <input type="text" placeholder="Damage">
+                <input type="text" placeholder="Type">
+                <input type="text" placeholder="Notes">
+            `;
+            dataRows.appendChild(newRow);
         }
-
-        function addWeapon() {
-            weapons.push({ name: '', range: '', hitDc: '', damage: '', type: '', notes: '' });
-            renderWeapons();
-        }
-
-        function updateWeapon(index, key, value) {
-            weapons[index][key] = value;
-        }
-
-        function removeWeapon(index) {
-            weapons.splice(index, 1);
-            renderWeapons();
-        }
-
-        // Initial render
-        renderWeapons();
     </script>
 </body>
 </html>
-
