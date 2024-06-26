@@ -13,7 +13,7 @@
             margin: 0; /* Remove default margin */
             padding: 20px; /* Padding around the container */
             display: flex; /* Use flexbox for alignment */
-            justify-content: flex-start; /* Align to the left */
+            justify-content: center; /* Center horizontally */
             align-items: flex-start; /* Align to the top */
             min-height: 100vh; /* Ensure body takes full height */
             box-sizing: border-box; /* Include padding in height calculation */
@@ -23,8 +23,8 @@
             background-color: #333333; /* Background color of the container */
             padding: 20px; /* Padding inside the container */
             border-radius: 8px; /* Rounded corners */
-            max-width: 800px; /* Maximum width of the container */
             width: 100%; /* Full width */
+            max-width: 800px; /* Maximum width of the container */
             box-sizing: border-box; /* Include padding in width calculation */
         }
         /* Style for the header */
@@ -33,31 +33,28 @@
             justify-content: space-between; /* Space between headers */
             margin-bottom: 10px; /* Space below headers */
         }
-        /* Style for each header item */
-        .header div {
-            background-color: #444444; /* Background color of header boxes */
-            padding: 10px; /* Padding inside header boxes */
+        /* Style for each header item and input field */
+        .header div, .input-row input {
+            background-color: #444444; /* Background color */
+            padding: 10px; /* Padding inside */
             border-radius: 4px; /* Rounded corners */
             text-align: center; /* Center text */
-            flex: 1; /* Evenly space header items */
-            margin: 0 5px; /* Margin around header items */
+            flex: 1; /* Evenly space items */
+            margin: 0 5px; /* Margin around items */
+            box-sizing: border-box; /* Include padding in width calculation */
+        }
+        /* Additional styles for input fields */
+        .input-row input {
+            background-color: #555555; /* Different background color for input fields */
+            border: none; /* Remove default border */
+            color: #ffffff; /* Text color */
+            text-align: center; /* Center text */
         }
         /* Style for the input rows */
         .input-row {
             display: flex; /* Use flexbox for alignment */
             justify-content: space-between; /* Space between input fields */
             margin-bottom: 10px; /* Space below each row */
-        }
-        /* Style for each input field */
-        .input-row input {
-            background-color: #555555; /* Background color of input fields */
-            border: none; /* Remove default border */
-            border-radius: 4px; /* Rounded corners */
-            padding: 10px; /* Padding inside input fields */
-            color: #ffffff; /* Text color */
-            flex: 1; /* Evenly space input fields */
-            margin: 0 5px; /* Margin around input fields */
-            text-align: center; /* Center text */
         }
         /* Style for the add row button */
         .add-row-button {
