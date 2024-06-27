@@ -5,80 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weapons & Attacks</title>
     <style>
-        /* Style for the entire page */
         body {
-            font-family: sans-serif; /* Font family to match Notion's sans-serif style */
-            background-color: #2e2e2e; /* Background color of the page */
-            color: #ffffff; /* Text color */
-            margin: 0; /* Remove default margin */
-            padding: 20px; /* Padding around the container */
-            display: flex; /* Use flexbox for alignment */
-            justify-content: center; /* Center horizontally */
-            align-items: flex-start; /* Align to the top */
-            min-height: 100vh; /* Ensure body takes full height */
-            box-sizing: border-box; /* Include padding in height calculation */
+            font-family: Arial, sans-serif;
+            background-color: #2e2e2e;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            box-sizing: border-box;
         }
-        /* Style for the main container */
         .container {
-            background-color: #333333; /* Background color of the container */
-            padding: 20px; /* Padding inside the container */
-            border-radius: 8px; /* Rounded corners */
-            display: flex; /* Use flexbox for alignment */
-            flex-direction: column; /* Align items vertically */
-            align-items: center; /* Center items horizontally */
-            box-sizing: border-box; /* Include padding in width calculation */
-            width: auto; /* Allow the container to adjust width based on content */
+            background-color: #333333;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 800px;
         }
-        /* Style for the header */
+        h2 {
+            margin-bottom: 20px;
+        }
         .header {
-            display: flex; /* Use flexbox for alignment */
-            justify-content: space-between; /* Space between headers */
-            margin-bottom: 10px; /* Space below headers */
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 100%;
         }
-        /* Style for each header item and input field */
         .header div, .input-row input {
-            background-color: #444444; /* Background color */
-            padding: 10px; /* Padding inside */
-            border-radius: 4px; /* Rounded corners */
-            text-align: center; /* Center text */
-            box-sizing: border-box; /* Include padding in width calculation */
-            width: 150px; /* Set a fixed width for consistency */
-            margin: 0 5px; /* Margin around items */
-            flex: none; /* Prevent flex grow/shrink */
-            font-size: 14px; /* Set font size to match Notion's standard font size */
-            font-family: sans-serif; /* Font family to match Notion's sans-serif style */
+            background-color: #444444;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 130px;
+            margin: 0 5px;
+            flex: 1;
         }
-        /* Additional styles for input fields */
         .input-row input {
-            background-color: #555555; /* Different background color for input fields */
-            border: none; /* Remove default border */
-            color: #ffffff; /* Text color */
-            text-align: center; /* Center text */
-            font-size: 14px; /* Set font size to match Notion's standard font size */
-            font-family: sans-serif; /* Font family to match Notion's sans-serif style */
+            background-color: #555555;
+            border: none;
+            color: #ffffff;
         }
-        /* Style for the input rows */
         .input-row {
-            display: flex; /* Use flexbox for alignment */
-            justify-content: space-between; /* Space between input fields */
-            margin-bottom: 10px; /* Space below each row */
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 100%;
         }
-        /* Style for the add row button */
+        .delete-row-button {
+            background-color: #ff5555;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            color: #ffffff;
+            cursor: pointer;
+            margin-left: 5px;
+        }
         .add-row-button {
-            background-color: #777777; /* Background color of button */
-            border: none; /* Remove default border */
-            border-radius: 4px; /* Rounded corners */
-            padding: 10px 20px; /* Padding inside button */
-            color: #ffffff; /* Text color */
-            cursor: pointer; /* Pointer cursor on hover */
-            text-align: center; /* Center text */
-            margin-top: 10px; /* Space above button */
-            display: block; /* Block element */
-            width: 100%; /* Full width */
-            max-width: 800px; /* Maximum width of the button */
-            box-sizing: border-box; /* Include padding in width calculation */
-            font-size: 14px; /* Set font size to match Notion's standard font size */
-            font-family: sans-serif; /* Font family to match Notion's sans-serif style */
+            background-color: #777777;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            color: #ffffff;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+            max-width: 800px;
+            box-sizing: border-box;
         }
     </style>
 </head>
@@ -101,6 +103,7 @@
                 <input type="text" placeholder="Damage">
                 <input type="text" placeholder="Type">
                 <input type="text" placeholder="Notes">
+                <button class="delete-row-button" onclick="deleteRow(this)">Delete</button>
             </div>
         </div>
         <button class="add-row-button" onclick="addRow()">Add Row</button>
@@ -118,8 +121,13 @@
                 <input type="text" placeholder="Damage">
                 <input type="text" placeholder="Type">
                 <input type="text" placeholder="Notes">
+                <button class="delete-row-button" onclick="deleteRow(this)">Delete</button>
             `;
             dataRows.appendChild(newRow);
+        }
+
+        function deleteRow(button) {
+            button.parentElement.remove();
         }
     </script>
 </body>
