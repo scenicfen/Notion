@@ -37,21 +37,33 @@
             margin-bottom: 10px;
             width: 100%;
         }
-        .header div, .input-row input {
+        .header div {
             background-color: #444444;
             padding: 10px;
             border-radius: 4px;
             text-align: center;
             box-sizing: border-box;
-            width: 100%;
-            max-width: 130px;
             margin: 0 5px;
             flex: 1;
+        }
+        .header div.weapon-attack {
+            width: 150px;
+            flex: none;
         }
         .input-row input {
             background-color: #555555;
             border: none;
             color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin: 0 5px;
+            flex: 1;
+        }
+        .input-row input.weapon-attack {
+            width: 150px;
+            flex: none;
         }
         .input-row {
             display: flex;
@@ -67,6 +79,7 @@
             color: #ffffff;
             cursor: pointer;
             margin-left: 5px;
+            flex: none;
         }
         .add-row-button {
             background-color: #777777;
@@ -88,7 +101,7 @@
     <div class="container">
         <h2>Weapons & Attacks</h2>
         <div class="header">
-            <div>Weapon/Attack</div>
+            <div class="weapon-attack">Weapon/Attack</div>
             <div>Range</div>
             <div>Hit/DC</div>
             <div>Damage</div>
@@ -97,7 +110,7 @@
         </div>
         <div id="data-rows">
             <div class="input-row">
-                <input type="text" placeholder="Weapon/Attack">
+                <input type="text" class="weapon-attack" placeholder="Weapon/Attack">
                 <input type="text" placeholder="Range">
                 <input type="text" placeholder="Hit/DC">
                 <input type="text" placeholder="Damage">
@@ -115,7 +128,7 @@
             const newRow = document.createElement('div');
             newRow.className = 'input-row';
             newRow.innerHTML = `
-                <input type="text" placeholder="Weapon/Attack">
+                <input type="text" class="weapon-attack" placeholder="Weapon/Attack">
                 <input type="text" placeholder="Range">
                 <input type="text" placeholder="Hit/DC">
                 <input type="text" placeholder="Damage">
